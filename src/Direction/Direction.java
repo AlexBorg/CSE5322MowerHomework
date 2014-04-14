@@ -17,10 +17,10 @@ public abstract class Direction {
 
     // these are the data points that the mower algorithm needs to traverse the lawn.
     public class Neighbors {
-        Point left;
-        Point fore;
-        Point right;
-        Point leftAft;
+        public Point left;
+        public Point fore;
+        public Point right;
+        public Point leftAft;
     }
 
     public static Direction getNorth() {

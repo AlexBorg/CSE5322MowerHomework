@@ -16,7 +16,8 @@ public class MowerTest {
         assertNotNull(mower);
 
         Point p = new Point(0,0);
-        assertEquals(mower.getLocation(), p);
+        Point result = mower.getLocation();
+        assertEquals(result, p);
     }
 
     @Test
