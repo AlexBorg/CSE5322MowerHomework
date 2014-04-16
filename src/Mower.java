@@ -9,6 +9,7 @@ import java.util.HashSet;
 public class Mower {
     Point p = new Point(0,0);
     HashSet<Point> history = new HashSet<>();
+    int timesVisitedOriginSinceLastCut = 0; // used when we cannot reach remaining grass
 
     Direction direction = Direction.getEast();
     MowerState state = Cutting.getInstance();
@@ -26,7 +27,7 @@ public class Mower {
     public Direction getDirection() {return direction;}
 
     public MowerState enterState() {
-        return state.enterState(this);
+        return state = state.enterState(this);
     }
 
     public MowerState timerEvent(int dayOfTheYear) {

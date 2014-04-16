@@ -31,6 +31,10 @@ public class West extends Direction {
         return new Point(x-1,y);
     }
 
+    public String printArrow() {
+        return "\u2190";
+    }
+
     public Direction.Neighbors getNeighbors(final Point start) {
         int x = (int)(start.getX() + 0.5);
         int y = (int)(start.getY() + 0.5);

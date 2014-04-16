@@ -10,7 +10,7 @@ public class TurningRight extends MowerState {
     }
 
     public MowerState enterState(Mower mower) {
-        mower.turnLeft();
+        mower.turnRight();
         return MovingForward.getInstance();
     }
 }

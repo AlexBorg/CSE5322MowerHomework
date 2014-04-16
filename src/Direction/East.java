@@ -31,6 +31,10 @@ public class East extends Direction {
         return new Point(x+1,y);
     }
 
+    public String printArrow() {
+        return "\u2192";
+    }
+
     public Neighbors getNeighbors(final Point start) {
         int x = (int)(start.getX() + 0.5);
         int y = (int)(start.getY() + 0.5);

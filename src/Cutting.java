@@ -10,8 +10,10 @@ public class Cutting extends MowerState {
     }
 
     public MowerState enterState(Mower mower) {
-        if (mower.lawn.get(mower.p) == Lawn.GRASS)
+        if (mower.lawn.get(mower.p) == Lawn.GRASS) {
             mower.history.clear();
+            mower.timesVisitedOriginSinceLastCut = 0;
+        }
         mower.mowGrass();
         return Percepting.getInstance();
     }

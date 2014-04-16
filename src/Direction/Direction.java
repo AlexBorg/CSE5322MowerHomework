@@ -15,6 +15,8 @@ public abstract class Direction {
 
     public abstract Neighbors getNeighbors(final Point start);
 
+    public abstract String printArrow();
+
     // these are the data points that the mower algorithm needs to traverse the lawn.
     public class Neighbors {
         public Point left;

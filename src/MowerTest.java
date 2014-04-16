@@ -11,7 +11,7 @@ import java.awt.*;
 public class MowerTest {
 
     @Test
-    public void testCreate() {
+    public void testCreate() throws Exception {
         Mower mower = new Mower();
         assertNotNull(mower);
 
@@ -21,7 +21,7 @@ public class MowerTest {
     }
 
     @Test
-    public void testMowGrass() {
+    public void testMowGrass() throws Exception {
         Mower mower = new Mower();
         Lawn lawn = new Lawn(2,2);
         mower.setLawn(lawn);
@@ -31,7 +31,7 @@ public class MowerTest {
 
 
     @Test
-    public void testTurnAndMove() {
+    public void testTurnAndMove() throws Exception {
         Mower mower = new Mower();
         Lawn lawn = new Lawn(5,5);
         mower.setLawn(lawn);
@@ -64,4 +64,104 @@ public class MowerTest {
         assertEquals(mower.getDirection(),Direction.getWest());
     }
 
+    void printMowerState(Mower mower) {
+        int mowX = mower.getX();
+        int mowY = mower.getY();
+
+        Lawn lawn = mower.lawn;
+
+        for (int j=0; j < lawn.getHeight(); ++j) {
+            for (int i=0; i < lawn.getWidth(); ++i) {
+                System.out.print(lawn.get(i, j));
+                if ((i == mowX) && (j == mowY)) {
+                    System.out.print(mower.direction.printArrow());
+                }
+                System.out.print("\t");
+            }
+            System.out.print("\n");
+        } 
+        System.out.println("------------------------");
+    }
+
+    @Test
+    public void testMowerOpenLawn() throws Exception {
+        Mower mower = new Mower();
+        Lawn lawn = new Lawn(20,20);
+        mower.setLawn(lawn);
+
+        mower.timerEvent(150);
+
+        while(mower.state != Sleeping.getInstance()) {
+            mower.enterState();
+            if (mower.state == Percepting.getInstance()) {
+                printMowerState(mower);
+                Thread.sleep(300);
+            }
+        }
+        printMowerState(mower);
+    }
+
+    @Test
+    public void testMowerSmallObjects() throws Exception {
+        Mower mower = new Mower();
+        Lawn lawn = new Lawn(20,20);
+        lawn.set(1,0,10);
+        lawn.set(4,7,10);
+        lawn.set(9,8,10);
+        lawn.set(12,17,10);
+        lawn.set(19,16,10);
+        mower.setLawn(lawn);
+
+        mower.timerEvent(150);
+
+        while(mower.state != Sleeping.getInstance()) {
+            mower.enterState();
+            if (mower.state == Percepting.getInstance()) {
+                printMowerState(mower);
+                Thread.sleep(300);
+            }
+        }
+        printMowerState(mower);
+    }
+
+    @Test
+    public void testMowerLargeObjects() throws Exception {
+        Mower mower = new Mower();
+        Lawn lawn = new Lawn(20,20);
+        mower.setLawn(lawn);
+        lawn.set(1,0,10);
+        lawn.set(2,0,10);
+        lawn.set(1,1,10);
+        lawn.set(2,1,10);
+        lawn.set(4,7,10);
+        lawn.set(5,7,10);
+        lawn.set(4,8,10);
+        lawn.set(5,8,10);
+
+        lawn.set(9,8,10);
+        lawn.set(10,8,10);
+        lawn.set(9,9,10);
+        lawn.set(10,9,10);
+
+        lawn.set(12,17,10);
+        lawn.set(13,17,10);
+        lawn.set(12,18,10);
+        lawn.set(13,18,10);
+
+        lawn.set(18,16,10);
+        lawn.set(19,16,10);
+        lawn.set(18,17,10);
+        lawn.set(19,17,10);
+
+        mower.timerEvent(150);
+
+        while(mower.state != Sleeping.getInstance()) {
+            mower.enterState();
+            if (mower.state == Percepting.getInstance()) {
+                printMowerState(mower);
+                Thread.sleep(100);
+            }
+        }
+        printMowerState(mower);
+    }
 }

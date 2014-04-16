@@ -32,7 +32,7 @@ public class Percepting extends MowerState {
         else if (right == Lawn.GRASS)
             return mower.state = TurningRight.getInstance();
         else {
-            boolean finished = lawn.isAllCut();
+            boolean finished = lawn.isAllCut() || (mower.timesVisitedOriginSinceLastCut > 2);
             boolean leftBlocked = ((left == Lawn.OBSTACLE) || (left == Lawn.TRAP));
             boolean foreBlocked = ((fore == Lawn.OBSTACLE) || (fore == Lawn.TRAP));
             boolean rightBlocked = ((right == Lawn.OBSTACLE) || (right == Lawn.TRAP));
@@ -54,7 +54,7 @@ public class Percepting extends MowerState {
             else if (leftBlocked && foreBlocked && rightBlocked) {
                 return mower.state = TurningAround.getInstance();
             }
-            else if (leftBlocked && !foreBlocked && !rightBlocked) {
+            else if (leftBlocked && foreBlocked && !rightBlocked) {
                 return mower.state = TurningRight.getInstance();
             }
             else if (leftBlocked && !foreBlocked) {
@@ -64,16 +64,20 @@ public class Percepting extends MowerState {
                 return mower.state = TurningLeft.getInstance();
             }
             else if (!leftBlocked && foreBlocked && !rightBlocked && leftAftBlocked) {
-                if (repeatVisitAndWest)
+                if (repeatVisitAndWest) {
+                    mower.history.remove(mower.p);
                     return mower.state = TurningRight.getInstance();
+                }
                 return mower.state = TurningLeft.getInstance();
             }
             else if (!leftBlocked && foreBlocked && !rightBlocked && !leftAftBlocked) {
                 return mower.state = TurningRight.getInstance();
             }
             else if (!leftBlocked && !foreBlocked && leftAftBlocked) {
-                if (repeatVisitAndWest)
+                if (repeatVisitAndWest) {
+                    mower.history.remove(mower.p);
                     return mower.state = MovingForward.getInstance();
+                }
                 return mower.state = TurningLeft.getInstance();
             }
             else if (!leftBlocked && !foreBlocked && !leftAftBlocked) {

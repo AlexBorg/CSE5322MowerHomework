@@ -31,6 +31,9 @@ public class South extends Direction {
         return new Point(x,y+1);
     }
 
+    public String printArrow() {
+        return "\u2193";
+    }
 
     public Direction.Neighbors getNeighbors(final Point start) {
         int x = (int)(start.getX() + 0.5);
