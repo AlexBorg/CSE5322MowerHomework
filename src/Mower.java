@@ -54,4 +54,9 @@ public class Mower {
         lawn = lawnIn;
     }
 
+    public void main() throws Exception {
+        MowerTest tester = new MowerTest();
+        tester.testMowerOpenLawn();
+    }
+
 }
