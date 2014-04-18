@@ -1,5 +1,3 @@
-import Direction.Direction;
-
 import java.awt.*;
 import java.util.HashSet;
 
@@ -11,7 +9,7 @@ public class Mower {
     HashSet<Point> history = new HashSet<>();
     int timesVisitedOriginSinceLastCut = 0; // used when we cannot reach remaining grass
 
-    Direction direction = Direction.getEast();
+    Direction direction = East.getInstance();
     MowerState state = Cutting.getInstance();
     Lawn lawn = null;
 
@@ -35,28 +33,33 @@ public class Mower {
     }
 
     public Direction turnLeft() {
-        return direction = direction.turnLeft();
+        return direction.turnLeft(this);
     }
 
     public Direction turnRight() {
-        return direction = direction.turnRight();
+        return direction.turnRight(this);
     }
 
     public Direction  turnAround() {
-        return direction = direction.turnAround();
+        return direction.turnAround(this);
     }
 
     public Point moveForward() {
-        return p = direction.moveForward(p);
+        return direction.moveForward(this);
     }
 
     public void setLawn(Lawn lawnIn) {
         lawn = lawnIn;
     }
 
-    public void main() throws Exception {
+    public static void main(String [ ] args) {
         MowerTest tester = new MowerTest();
-        tester.testMowerOpenLawn();
+        try {
+            tester.testMowerOpenLawn();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

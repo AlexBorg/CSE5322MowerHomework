@@ -1,5 +1,3 @@
-import Direction.Direction;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -37,7 +35,7 @@ public class MowerTest {
         mower.setLawn(lawn);
         assertEquals(mower.getX(),0);
         assertEquals(mower.getY(),0);
-        assertEquals(mower.getDirection(),Direction.getEast());
+        assertEquals(mower.getDirection(),East.getInstance());
 
         mower.moveForward();
         assertEquals(mower.getX(),1);
@@ -47,21 +45,21 @@ public class MowerTest {
         mower.moveForward();
         assertEquals(mower.getX(),1);
         assertEquals(mower.getY(), 1);
-        assertEquals(mower.getDirection(), Direction.getSouth());
+        assertEquals(mower.getDirection(), South.getInstance());
 
         mower.moveForward();
         mower.moveForward();
         mower.turnAround();
         assertEquals(mower.getX(),1);
         assertEquals(mower.getY(),3);
-        assertEquals(mower.getDirection(),Direction.getNorth());
+        assertEquals(mower.getDirection(),North.getInstance());
 
         mower.moveForward();
         mower.turnLeft();
         mower.moveForward();
         assertEquals(mower.getX(), 0);
         assertEquals(mower.getY(),2);
-        assertEquals(mower.getDirection(),Direction.getWest());
+        assertEquals(mower.getDirection(),West.getInstance());
     }
 
     void printMowerState(Mower mower) {
@@ -79,7 +77,7 @@ public class MowerTest {
                 System.out.print("\t");
             }
             System.out.print("\n");
-        } 
+        }
         System.out.println("------------------------");
     }
 

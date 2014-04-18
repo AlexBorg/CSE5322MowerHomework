@@ -1,10 +1,7 @@
-package Direction;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.*;
 
 /**
  * Unit tests for the direction state
@@ -17,28 +14,28 @@ public class DirectionTest {
 
     @Before
     public void setPointers() {
-        north = Direction.getNorth();
-        east = Direction.getEast();
-        south = Direction.getSouth();
-        west = Direction.getWest();
+        north = North.getInstance();
+        east = East.getInstance();
+        south = South.getInstance();
+        west = West.getInstance();
     }
 
     @Test
     public void testNorth() throws Exception {
-        Direction dir = Direction.getNorth();
+        Direction dir = North.getInstance();
         assertNotNull(dir);
 
+        Mower mower = new Mower();
         Direction result ;
-        result = dir.turnLeft();
+        result = dir.turnLeft(mower);
         assertEquals(result,west);
-        result = dir.turnRight();
+        result = dir.turnRight(mower);
         assertEquals(result,east);
-        result = dir.turnAround();
+        result = dir.turnAround(mower);
         assertEquals(result,south);
 
-        Point p = new Point(0,0);
         double tolerance = 0.01;
-        Direction.Neighbors neighbors = dir.getNeighbors(p);
+        Direction.Neighbors neighbors = dir.getNeighbors(mower);
         assertEquals(neighbors.left.getX(), -1.0, tolerance);
         assertEquals(neighbors.left.getY(),  0.0, tolerance);
 
@@ -54,20 +51,20 @@ public class DirectionTest {
 
     @Test
     public void testEast() throws Exception {
-        Direction dir = Direction.getEast();
+        Direction dir = East.getInstance();
         assertNotNull(dir);
 
+        Mower mower = new Mower();
         Direction result ;
-        result = dir.turnLeft();
+        result = dir.turnLeft(mower);
         assertEquals(result,north);
-        result = dir.turnRight();
+        result = dir.turnRight(mower);
         assertEquals(result,south);
-        result = dir.turnAround();
+        result = dir.turnAround(mower);
         assertEquals(result,west);
 
-        Point p = new Point(0,0);
         double tolerance = 0.01;
-        Direction.Neighbors neighbors = dir.getNeighbors(p);
+        Direction.Neighbors neighbors = dir.getNeighbors(mower);
         assertEquals(neighbors.left.getX(),  0.0, tolerance);
         assertEquals(neighbors.left.getY(), -1.0, tolerance);
 
@@ -83,20 +80,20 @@ public class DirectionTest {
 
     @Test
     public void testSouth() throws Exception {
-        Direction dir = Direction.getSouth();
+        Direction dir = South.getInstance();
         assertNotNull(dir);
 
+        Mower mower = new Mower();
         Direction result ;
-        result = dir.turnLeft();
+        result = dir.turnLeft(mower);
         assertEquals(result,east);
-        result = dir.turnRight();
+        result = dir.turnRight(mower);
         assertEquals(result,west);
-        result = dir.turnAround();
+        result = dir.turnAround(mower);
         assertEquals(result,north);
 
-        Point p = new Point(0,0);
         double tolerance = 0.01;
-        Direction.Neighbors neighbors = dir.getNeighbors(p);
+        Direction.Neighbors neighbors = dir.getNeighbors(mower);
         assertEquals(neighbors.left.getX(),  1.0, tolerance);
         assertEquals(neighbors.left.getY(),  0.0, tolerance);
 
@@ -112,20 +109,20 @@ public class DirectionTest {
 
     @Test
     public void testWest() throws Exception {
-        Direction dir = Direction.getWest();
+        Direction dir = West.getInstance();
         assertNotNull(dir);
 
+        Mower mower = new Mower();
         Direction result ;
-        result = dir.turnLeft();
+        result = dir.turnLeft(mower);
         assertEquals(result,south);
-        result = dir.turnRight();
+        result = dir.turnRight(mower);
         assertEquals(result,north);
-        result = dir.turnAround();
+        result = dir.turnAround(mower);
         assertEquals(result,east);
 
-        Point p = new Point(0,0);
         double tolerance = 0.01;
-        Direction.Neighbors neighbors = dir.getNeighbors(p);
+        Direction.Neighbors neighbors = dir.getNeighbors(mower);
         assertEquals(neighbors.left.getX(),  0.0, tolerance);
         assertEquals(neighbors.left.getY(),  1.0, tolerance);
 

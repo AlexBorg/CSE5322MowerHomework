@@ -1,7 +1,3 @@
-import Direction.Direction;
-import Direction.East;
-import Direction.West;
-
 import java.awt.*;
 
 /**
@@ -19,7 +15,7 @@ public class Percepting extends MowerState {
     public MowerState enterState(Mower mower) {
         Lawn lawn = mower.lawn;
 
-        Direction.Neighbors neighbors = mower.direction.getNeighbors(mower.getLocation());
+        Direction.Neighbors neighbors = mower.direction.getNeighbors(mower);
         int left = lawn.get(neighbors.left);
         int fore = lawn.get(neighbors.fore);
         int right = lawn.get(neighbors.right);

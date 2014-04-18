@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CSE5322MowerHomework:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CSE5322MowerHomework_jar</output-path>
+    <root id="archive" name="CSE5322MowerHomework.jar">
+      <element id="module-output" name="CSE5322MowerHomework" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
