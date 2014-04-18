@@ -1,7 +1,9 @@
 import java.awt.*;
 
 /**
- * State for cutting grass
+ * State for determining what exists around the mower and making movement
+ * decisions based on the immediate surroundings. This algorithm will
+ * travel clockwise around obstacles seeking out uncut grass.
  */
 public class Percepting extends MowerState {
     private static Percepting instance = null;

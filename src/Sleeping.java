@@ -1,5 +1,6 @@
 /**
- * State for cutting grass
+ * State for the mower to sleep. Wakes if the date passed is within
+ * seasonal bounds and enough time has passed since the last mowing.
  */
 public class Sleeping extends MowerState {
     private static Sleeping instance = null;
